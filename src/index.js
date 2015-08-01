@@ -3,14 +3,10 @@
  */
 
 /* local imports */
-import hoverable from './decorators/hoverable'
-import clickable from './decorators/clickable'
+import listenTo from './decorators/listenTo'
 
 // exports
-export default {
-    hoverable: hoverable,
-    clickable: clickable,
-}
+export default listenTo
 
 
 // end of file

@@ -1,5 +1,5 @@
 /*
- * Unit tests for `clickable` decorator.
+ * Unit tests for `hoverable` decorator.
  *
  */
 
@@ -7,10 +7,10 @@
 import React, {addons} from 'react/addons'
 const TestUtils = addons.TestUtils
 /* local imports */
-import clickable from './index'
+import listenTo from './index'
 
 
-describe('clickable', function() {
+describe('listenTo', function() {
     it('should be tested')
 })
 
