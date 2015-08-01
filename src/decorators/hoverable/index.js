@@ -16,6 +16,7 @@ function hoverable(Component) {
                 hover: false,
             }
         }
+
         render() {
             let child = (<Component {...this.props} hover={this.state.hover} />)
 
@@ -48,5 +49,6 @@ function hoverable(Component) {
 
 // export decorator
 export default hoverable
+
 
 // end of file

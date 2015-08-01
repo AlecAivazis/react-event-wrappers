@@ -16,6 +16,7 @@ function clickable(Component) {
                 click: false,
             }
         }
+
         render() {
             let child = (<Component {...this.props} click={this.state.click} />)
 
@@ -48,5 +49,6 @@ function clickable(Component) {
 
 // export decorator
 export default clickable
+
 
 // end of file

@@ -11,3 +11,6 @@ export default {
     hoverable: hoverable,
     clickable: clickable,
 }
+
+
+// end of file
