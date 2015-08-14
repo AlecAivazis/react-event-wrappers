@@ -11,6 +11,9 @@ var project_paths = require('./project_paths')
 
 // export the configuration
 module.exports = {
+    output: {
+        libraryTarget: 'commonjs2',
+    },
     module: {
         preLoaders: [
             {
