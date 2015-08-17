@@ -19,6 +19,7 @@ function find_true_child(element) {
     return find_true_child(element.props.children)
 }
 
+
 /**
  * Creates a decorator that will add event listeners to a React component.
  * @param {string[]} events - The react events to listen to.
