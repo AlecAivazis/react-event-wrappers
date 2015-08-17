@@ -1,60 +1,73 @@
 /* common react imports */
 import React from 'react/addons'
 /* misc third party imports */
-import {assign, capitalize, snakeCase} from 'lodash'
+import {capitalize} from 'lodash'
 
 
 /**
+ * Find the first decendant which is not an event-wrapper.
+ * @param {ReactElement} element - The react element whose decendants you wish
+ * to check.
+ **/
+function find_true_child(element) {
+    // if wrapped component has not been flagged
+    if (!element._is_react_event_wrapper) {
+        // it is the true child
+        return element
+    }
+    // otherwise continue down the chain
+    return find_true_child(element.props.children)
+}
+
+/**
  * Creates a decorator that will add event listeners to a React component.
- * @param {string} event - The react event to listen to.
+ * @param {string[]} events - The react events to listen to.
  * @returns {function} The decorator to wrap a component with.
  */
-function listenTo(event) {
-    // e.g. "mouse_down"
-    const snake_cased_event = snakeCase(event)
-    // e.g. "onMouseDown"
-    const on_capitalized_event = 'on' + capitalize(event)
+function listenTo(...args) {
+    // use args as list of events
+    let events = args
+    // if user passes single argument that is an array
+    if (args.length === 1 && args[0].constructor === Array) {
+        // use it as list of events instead
+        events = args[0]
+    }
+
+    // e.g. ["onMouseDown", "onMouseUp"]
+    const on_capitalized_events = events.map(event => 'on' + capitalize(event))
 
     // return decorator
     return function(Component) {
         // define wrapper component
         class WrapperComponent extends React.Component {
-            constructor() {
-                super(...arguments)
-
-                this.state = {}
-                this.state[snake_cased_event] = false
-                // or true ????
+            constructor(...constructor_args) {
+                // instantiate this
+                super(...constructor_args)
+                // add the wrapper flag
+                this._is_react_event_wrapper = true
             }
 
             render() {
-                // hash of props to pass to wrapped component
-                // should state overwrite props or visa versa ????
-                let props = assign({}, this.props, this.state)
                 // wrapped component
-                let child = (<Component {...props} />)
+                const first_child = <Component {...this.props} />
+                // first decendant that isnt just one of our wrappers
+                const true_child = find_true_child(first_child)
 
                 // hash of listeners for the wrapping `div`
                 let listeners = {}
-                // set listener for `event`
-                listeners[on_capitalized_event] = (...listener_args) => {
-                    let new_state = {}
-                    new_state[snake_cased_event] = true
-                    // or false ????
-                    // update state, then call child implementation (if any)
-                    this.setState(new_state, () => {
-                        // if wrapped component has implemented a handler
-                        if (child.type.prototype[on_capitalized_event]) {
-                            // call it, and pass args to it appropriately
-                            child.type.prototype[on_capitalized_event](
-                                ...listener_args
-                            )
-                        }
-                    })
-                }
+                // iterate over the list of events
+                on_capitalized_events.forEach((event) => {
+                    // if true child has implemented a handler
+                    if (true_child.type.prototype[event]) {
+                        // store true child handler implementation
+                        listeners[event] = true_child.type.prototype[event]
+                            // and bind it to the true child instance
+                            .bind(true_child)
+                    }
+                })
 
                 return (<div {...listeners}>
-                    {child}
+                    {first_child}
                 </div>)
             }
         }

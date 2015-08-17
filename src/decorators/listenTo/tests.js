@@ -1,5 +1,5 @@
 /*
- * Unit tests for `hoverable` decorator.
+ * Unit tests for `listenTo` decorator.
  *
  */
 
