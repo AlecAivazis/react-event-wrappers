@@ -1,6 +1,5 @@
-/*
+/**
  * Unit tests for `listenTo` decorator.
- *
  */
 
 /* common react imports */
