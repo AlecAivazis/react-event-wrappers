@@ -1,6 +1,5 @@
-/*
+/**
  * Unit tests for `hoverable` decorator.
- *
  */
 
 /* common react imports */

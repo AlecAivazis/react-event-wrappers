@@ -2,8 +2,6 @@
 import React from 'react/addons'
 /* misc third party imports */
 import {assign} from 'lodash'
-/* local imports */
-import listenTo from '../listenTo'
 
 
 /**
@@ -18,26 +16,21 @@ function hoverable(Component) {
             super(...args)
             // set initial state
             this.state = {hover: false}
-            // // add the wrapper flag
-            // this._is_react_event_wrapper = true
-        }
-
-        onMouseEnter() {
-            this.setState({hover: true})
-        }
-
-        onMouseLeave() {
-            this.setState({hover: false})
         }
 
         render() {
-            const props = assign({}, this.props, this.state)
-
-            return <Component {...props} />
+            return (
+                <div
+                    onMouseEnter={() => this.setState({hover: true})}
+                    onMouseLeave={() => this.setState({hover: false})}
+                >
+                    <Component {...assign({}, this.props, this.state)} />
+                </div>
+            )
         }
     }
 
-    return listenTo('mouseEnter', 'mouseLeave')(HoverableComponent)
+    return HoverableComponent
 }
 
 
