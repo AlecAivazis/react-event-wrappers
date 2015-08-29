@@ -1,16 +1,15 @@
-/*
- * Unit tests for `clickable` decorator.
- *
+/**
+ * Unit tests for `EventHandler` Component.
  */
 
 /* common react imports */
 import React, {addons} from 'react/addons'
 const TestUtils = addons.TestUtils
 /* local imports */
-import clickable from './index'
+import EventHandler from './index'
 
 
-describe('clickable', function() {
+describe('EventHandler', function() {
     it('should be tested')
 })
 

@@ -1,42 +1,30 @@
 /* common react imports */
 import React from 'react/addons'
+/* misc third party imports */
+import {assign} from 'lodash'
 
 
 /**
- * Decorator to easily add basic hoverability to react component.
- *
- * @param {ReactElement} Component - The react component to wrap.
+ * Decorator for adding `hover` state variable to a React component.
+ * @param {ReactComponent} Component - The react component to wrap.
+ * @returns {ReactComponent} The wrapped react component.
  */
 function hoverable(Component) {
     class HoverableComponent extends React.Component {
-        constructor() {
-            super(...arguments)
-
-            this.state = {
-                hover: false,
-            }
+        constructor(...args) {
+            // instantiate this
+            super(...args)
+            // set initial state
+            this.state = {hover: false}
         }
-        render() {
-            let child = (<Component {...this.props} hover={this.state.hover} />)
 
+        render() {
             return (
                 <div
-                    onMouseEnter={() => {
-                        this.setState({hover: true})
-                        // if wrapped component implements `onMouseEnter` method
-                        if (child.type.prototype.onMouseEnter) {
-                            child.type.prototype.onMouseEnter(...arguments)
-                        }
-                    }}
-                    onMouseLeave={() => {
-                        this.setState({hover: false})
-                        // if wrapped component implements `onMouseLeave` method
-                        if (child.type.prototype.onMouseLeave) {
-                            child.type.prototype.onMouseLeave(...arguments)
-                        }
-                    }}
+                    onMouseEnter={() => this.setState({hover: true})}
+                    onMouseLeave={() => this.setState({hover: false})}
                 >
-                    {child}
+                    <Component {...assign({}, this.props, this.state)} />
                 </div>
             )
         }
@@ -48,5 +36,6 @@ function hoverable(Component) {
 
 // export decorator
 export default hoverable
+
 
 // end of file

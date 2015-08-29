@@ -1,15 +1,15 @@
 /**
- * Unit tests for `hoverable` decorator.
+ * Unit tests for `listenTo` decorator.
  */
 
 /* common react imports */
 import React, {addons} from 'react/addons'
 const TestUtils = addons.TestUtils
 /* local imports */
-import hoverable from './index'
+import listenTo from './index'
 
 
-describe('hoverable', function() {
+describe('listenTo', function() {
     it('should be tested')
 })
 
