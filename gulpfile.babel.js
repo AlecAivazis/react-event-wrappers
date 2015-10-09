@@ -69,7 +69,7 @@ gulp.task('test', (cb) => {
     const server = new karma.Server({
         configFile: project_paths.karma_config,
         singleRun: true
-    }, cb)
+    }, () => cb())
 
     server.start()
 })

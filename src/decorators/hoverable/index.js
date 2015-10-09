@@ -6,10 +6,17 @@ import {makeEventDecorator} from 'util'
  * Decorator for adding `hover` prop to a React component.
  */
 export const hoverable = makeEventDecorator({
-    state_var: 'hover',
-    state_var_initial: false,
-    to_true_event: 'onMouseEnter',
-    to_false_event: 'onMouseLeave',
+    state_vars: {
+        hover: false,
+    },
+    event_handlers: {
+        onMouseEnter: function () {
+            this.setState({hover: true})
+        },
+        onMouseLeave: function () {
+            this.setState({hover: false})
+        },
+    },
     display_name_prefix: 'Hoverable',
 })
 
