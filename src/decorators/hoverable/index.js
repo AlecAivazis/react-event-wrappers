@@ -1,41 +1,17 @@
-/* common react imports */
-import React from 'react/addons'
-/* misc third party imports */
-import {assign} from 'lodash'
+// local imports
+import {makeEventDecorator} from 'util'
 
 
 /**
- * Decorator for adding `hover` state variable to a React component.
- * @param {ReactComponent} Component - The react component to wrap.
- * @returns {ReactComponent} The wrapped react component.
+ * Decorator for adding `hover` prop to a React component.
  */
-function hoverable(Component) {
-    class HoverableComponent extends React.Component {
-        constructor(...args) {
-            // instantiate this
-            super(...args)
-            // set initial state
-            this.state = {hover: false}
-        }
-
-        render() {
-            return (
-                <div
-                    onMouseEnter={() => this.setState({hover: true})}
-                    onMouseLeave={() => this.setState({hover: false})}
-                >
-                    <Component {...assign({}, this.props, this.state)} />
-                </div>
-            )
-        }
-    }
-
-    return HoverableComponent
-}
-
-
-// export decorator
-export default hoverable
+export const hoverable = makeEventDecorator({
+    state_var: 'hover',
+    state_var_initial: false,
+    to_true_event: 'onMouseEnter',
+    to_false_event: 'onMouseLeave',
+    display_name_prefix: 'Hoverable',
+})
 
 
 // end of file
