@@ -5,7 +5,7 @@ import React from 'react'
 /**
  * Returns a decorator that adds event handlers to components.
  */
-export function makeEventDecorator({state_vars, events, display_name_prefix}) {
+export default function makeEventDecorator({state_vars, events, display_name_prefix}) {
     // return the decorator (which takes the wrapped component as its only arg)
     return (Wrapped) => {
         // the component which wraps the wrapped component

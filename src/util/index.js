@@ -1,1 +1,5 @@
-export * from './makeEventDecorator'
+import makeEventDecorator from './makeEventDecorator'
+
+export default {
+    makeEventDecorator,
+}

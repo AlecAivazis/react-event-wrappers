@@ -37,7 +37,10 @@ module.exports = {
             {
                 test: /\.js$/,
                 loader: 'babel',
-                include: project_paths.source_dir,
+                include: [
+                    project_paths.source_dir,
+                    project_paths.tests_dir,
+                ],
                 query: {stage: 0},
             },
         ],

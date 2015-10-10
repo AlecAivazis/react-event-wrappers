@@ -5,7 +5,7 @@ import {makeEventDecorator} from 'util'
 /**
  * Decorator for adding `hover` prop to a React component.
  */
-export const hoverable = makeEventDecorator({
+export default const hoverable = makeEventDecorator({
     state_vars: {
         hover: false,
     },

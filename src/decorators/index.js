@@ -1,1 +1,5 @@
-export * from './hoverable'
+import hoverable from './hoverable'
+
+export default {
+    hoverable,
+}

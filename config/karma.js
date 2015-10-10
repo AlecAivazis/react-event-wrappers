@@ -9,13 +9,9 @@ var project_paths = require('./project_paths')
 var webpack_config = require(project_paths.webpack_config)
 
 
-
-var unit_tests_glob = 'src/**/tests.js'
-
-
 // annoying hack to be able to dynamically set keys on object
 var preprocessors = {}
-preprocessors[unit_tests_glob] = ['webpack', 'sourcemap']
+preprocessors[project_paths.tests_glob] = ['webpack', 'sourcemap']
 
 
 module.exports = function(config) {
@@ -32,7 +28,7 @@ module.exports = function(config) {
 
         // list of files / patterns to load in the browser
         files: [
-            unit_tests_glob,
+            project_paths.tests_glob,
         ],
 
         // // list of files to exclude
@@ -71,8 +67,8 @@ module.exports = function(config) {
         // start these browsers
         // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
         browsers: [
-            'Chrome',
-            // 'Firefox',
+            // 'Chrome',
+            'Firefox',
             // 'Safari',
         ],
     })
