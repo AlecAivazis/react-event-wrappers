@@ -1,5 +1,5 @@
 {
-  "name": "react-event-manager",
+  "name": "react-event-wrappers",
   "version": "0.0.0",
   "description": "A lightweight wrapper for React components which helps with common issues like eventHandlers and autoprefixing.",
   "main": "build/index.js",
