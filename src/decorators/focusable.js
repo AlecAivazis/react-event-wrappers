@@ -5,15 +5,15 @@ import {makeEventDecorator} from 'util'
 /**
  * Decorator for adding `focus` prop to a React component.
  */
-export default const makeEventDecorator({
+export default makeEventDecorator({
     state_vars: {
         focus: false,
     },
     event_handlers: {
-        onFocus: function () {
+        onFocus() {
             this.setState({focus: true})
         },
-        onBlur: function () {
+        onBlur() {
             this.setState({focus: false})
         },
     },

@@ -5,7 +5,7 @@ import React from 'react'
 /**
  * Returns a decorator that adds event handlers to components.
  */
-export default function makeEventDecorator({state_vars, events, display_name_prefix}) {
+export default function makeEventDecorator({initial_state, event_handlers, display_name_prefix}) {
     // return the decorator (which takes the wrapped component as its only arg)
     return (Wrapped) => {
         // the component which wraps the wrapped component
@@ -14,22 +14,16 @@ export default function makeEventDecorator({state_vars, events, display_name_pre
                 // instantiate this
                 super(...args)
                 // set initial state
-                this.state = Object.keys(state_vars).reduce((state, key) => {
-                    const state_var = state_vars[key]
-                    return {
-                        ...state,
-                        [state_var.name]: state_var.initial,
-                    }
-                }, {})
+                this.state = initial_state
             }
+
 
             render() {
                 // props to put on the wrapper component
-                const wrapper_props = Object.keys(events).reduce((props, key) => {
-                    const event = events[key]
+                const wrapper_props = Object.keys(event_handlers).reduce((props, key) => {
                     return {
                         ...props,
-                        [event.name]: event.handler.bind(this),
+                        [key]: event_handlers[key].bind(this),
                     }
                 }, {})
                 // props to put on the wrapped component

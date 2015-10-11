@@ -10,10 +10,10 @@ export default makeEventDecorator({
         hover: false,
     },
     event_handlers: {
-        onMouseEnter: function () {
+        onMouseEnter() {
             this.setState({hover: true})
         },
-        onMouseLeave: function () {
+        onMouseLeave() {
             this.setState({hover: false})
         },
     },

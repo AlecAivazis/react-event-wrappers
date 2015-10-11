@@ -6,14 +6,14 @@ import {makeEventDecorator} from 'util'
  * Decorator for adding `click` prop to a React component.
  */
 export default makeEventDecorator({
-    state_vars: {
+    initial_state: {
         click: false,
     },
     event_handlers: {
-        onMouseDown: function () {
+        onMouseDown() {
             this.setState({click: true})
         },
-        onMouseUp: function () {
+        onMouseUp() {
             this.setState({click: false})
         },
     },
